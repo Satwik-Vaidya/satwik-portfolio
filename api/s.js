@@ -20,9 +20,11 @@ import { buildMessages } from '../src/components/s/scaffold.js';
 // ────────────────────────────────────────────────────────────
 const GEMINI_MODEL = 'gemini-2.5-flash';
 const GROQ_MODEL = 'llama-3.3-70b-versatile';
+const CEREBRAS_MODEL = 'gpt-oss-120b';
 
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const CEREBRAS_URL = 'https://api.cerebras.ai/v1/chat/completions';
 
 const MAX_TOKENS = 400; // Cap output — S's responses are short
 const TEMPERATURE = 0.85; // Slightly creative for voice variation
@@ -153,6 +155,45 @@ async function callGroq({ systemPrompt, messages, apiKey }) {
 }
 
 // ────────────────────────────────────────────────────────────
+
+
+// ────────────────────────────────────────────────────────────
+// Engine: Cerebras (Llama 3.3 70B) — OpenAI-compatible API.
+// Same shape as Groq, just a different base URL.
+// ────────────────────────────────────────────────────────────
+async function callCerebras({ systemPrompt, messages, apiKey }) {
+  const body = {
+    model: CEREBRAS_MODEL,
+    messages: [{ role: 'system', content: systemPrompt }, ...messages],
+    temperature: TEMPERATURE,
+    max_tokens: MAX_TOKENS,
+    response_format: { type: 'json_object' },
+  };
+
+  const res = await fetch(CEREBRAS_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => '');
+    throw new Error(`Cerebras ${res.status}: ${errText.slice(0, 200)}`);
+  }
+
+  const data = await res.json();
+  const text = data?.choices?.[0]?.message?.content;
+  if (!text) throw new Error('Cerebras returned no text');
+  console.log('========== CEREBRAS RAW OUTPUT ==========');
+  console.log(text);
+  console.log('========== END CEREBRAS RAW OUTPUT ==========');
+  return text;
+}
+
+// ────────────────────────────────────────────────────────────
 // Main handler
 // ────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
@@ -192,7 +233,10 @@ export default async function handler(req, res) {
 
     // Route + fallback cascade
     const primary = pickPrimaryEngine({ questionNumber, isFreetext });
-    const order = primary === 'gemini' ? ['gemini', 'groq'] : ['groq', 'gemini'];
+    // Cascade order: primary first, then fallbacks. Cerebras as 3rd tier — 1M tokens/day free.
+    const order = primary === 'gemini'
+      ? ['gemini', 'groq', 'cerebras']
+      : ['groq', 'gemini', 'cerebras'];
 
     let result = null;
     let engineUsed = null;
@@ -201,9 +245,10 @@ export default async function handler(req, res) {
     for (const engine of order) {
       try {
         const apiKey =
-          engine === 'gemini'
-            ? process.env.GEMINI_API_KEY
-            : process.env.GROQ_API_KEY;
+          engine === 'gemini' ? process.env.GEMINI_API_KEY
+          : engine === 'groq' ? process.env.GROQ_API_KEY
+          : engine === 'cerebras' ? process.env.CEREBRAS_API_KEY
+          : null;
 
         if (!apiKey) {
           console.warn(`[s] ${engine.toUpperCase()} key missing, skipping`);
@@ -211,9 +256,10 @@ export default async function handler(req, res) {
         }
 
         const rawText =
-          engine === 'gemini'
-            ? await callGemini({ systemPrompt, messages, apiKey })
-            : await callGroq({ systemPrompt, messages, apiKey });
+          engine === 'gemini' ? await callGemini({ systemPrompt, messages, apiKey })
+          : engine === 'groq' ? await callGroq({ systemPrompt, messages, apiKey })
+          : engine === 'cerebras' ? await callCerebras({ systemPrompt, messages, apiKey })
+          : null;
 
         const parsed = parseStructuredOutput(rawText);
         if (!parsed) {
