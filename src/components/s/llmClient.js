@@ -17,7 +17,7 @@ const ENDPOINT = '/api/s';
 
 // Timeout the request after this many ms.
 // LLM calls usually return in 1-3s; cap at 15s to avoid hung UIs.
-const TIMEOUT_MS = 15000;
+const TIMEOUT_MS = 25000; // generous — protects against cold-start cascade latency
 
 // ────────────────────────────────────────────────────────────
 // askS — main entry point
