@@ -6,6 +6,7 @@ import {
   finalQuestionPrompt,
   initialChips,
   CONTACT,
+  apiDeadFallback,
 } from './dialogue';
 import { askS, resolveMaxQuestions } from './llmClient';
 
@@ -138,7 +139,7 @@ export default function SChat({ onExit }) {
 
       const fallbackResponse = entry?.response
         ? entry.response
-        : "hm, my line to the model just dropped. real-life satwik is one email away — emailing is free anyway 😎\n\n— S";
+        : apiDeadFallback;
 
       setMessages((prev) => [
         ...prev,

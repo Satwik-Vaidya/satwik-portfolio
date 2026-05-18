@@ -321,3 +321,4 @@ export const initialChips = [
   { id: 'meta', label: "why do you care who's looking at your website, satwik?" },
   { id: 'browse', label: "just let me browse →", isExit: true },
 ];
+export const apiDeadFallback = "oh — looks like the free APIs i'm running on have had enough of me for today.\n\nreal talk: satwik built this whole receptionist on $0/month because he's a grad student and doesn't exactly have money to throw at crazy side projects like this. you're now witnessing what a broke genius's engineering looks like when the free tier taps out.\n\nif you'd like to see what he builds with actual resources behind him — i'm asking you, as a responsible citizen of this planet — hire him 😂\n\nor just close the tab and let one of the greatest talents i know slip past. your move.\n\n— S";
