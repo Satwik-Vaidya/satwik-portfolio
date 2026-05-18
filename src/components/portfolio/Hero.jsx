@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import { ChevronDown, Sparkles } from "lucide-react";
 
 export default function Hero({ opacity }) {
@@ -11,25 +11,25 @@ export default function Hero({ opacity }) {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-cyan-900/20" />
-        {[...Array(50)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+        {(() => {
+          const det = (n) => Math.abs(Math.sin(n));
+          const stars = Array.from({ length: 50 }).map((_, i) => {
+            const left = `${(det(i * 12.9898 + 78.233) * 100).toFixed(2)}%`;
+            const top = `${(det(i * 7.123 + 3.14) * 100).toFixed(2)}%`;
+            const duration = 3 + det(i * 5.123 + 12) * 2;
+            const delay = det(i * 3.7 + 7) * 2;
+            return { left, top, duration, delay };
+          });
+          return stars.map((s, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
+              style={{ left: s.left, top: s.top }}
+              animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: s.duration, repeat: Infinity, delay: s.delay }}
+            />
+          ));
+        })()}
       </div>
 
       

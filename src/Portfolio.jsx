@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion"; // eslint-disable-line no-unused-vars
 import Hero from "./components/portfolio/Hero";
 import About from "./components/portfolio/About";
 import Experience from "./components/portfolio/Experience";
@@ -9,13 +9,8 @@ import Activities from "./components/portfolio/Activities";
 import Contact from "./components/portfolio/Contact";
 
 export default function Portfolio() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   return (
     <div className="bg-[#0A0A0A] text-gray-100 min-h-screen overflow-x-hidden">

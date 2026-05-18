@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import { Award, ExternalLink, Brain, Droplet, Calendar, Users } from "lucide-react";
 
 export default function Projects() {
