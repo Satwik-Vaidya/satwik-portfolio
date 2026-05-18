@@ -26,7 +26,7 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GE
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const CEREBRAS_URL = 'https://api.cerebras.ai/v1/chat/completions';
 
-const MAX_TOKENS = 400; // Cap output — S's responses are short
+const MAX_TOKENS = 600; // Cap output — bumped for gpt-oss-120b (reasoning model, more verbose)
 const TEMPERATURE = 0.85; // Slightly creative for voice variation
 
 // ────────────────────────────────────────────────────────────
