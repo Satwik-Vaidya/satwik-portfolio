@@ -29,6 +29,7 @@ export default function Portfolio() {
         <About />
         <Experience />
         <Projects />
+        <Awards /> 
         <Education />
         <Activities />
         <Contact />

@@ -16,40 +16,39 @@ export default function Projects() {
       icon: Brain,
       gradient: "from-blue-500 to-cyan-500"
     },
-
     {
       title: "HyAPA-Net — UAV Swarm Management",
       description: "Hybrid ACO + DRL framework for UAV-swarm routing and fault recovery. On a 20-UAV simulation: 11.4% routing-cost reduction and 100% fault recovery. Under review at SN Computer Science (Springer Nature).",
       tech: ["Stable-Baselines3", "PPO", "ACO", "Python"],
-      icon: Plane,
+      icon: Brain,
       gradient: "from-blue-500 to-cyan-500"
     },
     {
       title: "Grokking Expanded",
       description: "Exploratory ML research on the Ergen et al. convexification conjecture — probing when and why neural networks suddenly generalize.",
       tech: ["PyTorch", "Optimization", "Research"],
-      icon: Puzzle,
+      icon: Brain,
       gradient: "from-cyan-500 to-teal-500"
     },
     {
       title: "AdaptML",
       description: "A proprietary meta-learning system that fits the right model to the shape of the problem. Proof-of-concept, currently in early testing.",
       tech: ["Meta-learning", "Proprietary"],
-      icon: Cpu,
+      icon: Brain,
       gradient: "from-teal-500 to-green-500"
     },
     {
       title: "S — AI Receptionist",
       description: "An AI receptionist for this site. A multi-engine router (Gemini / Groq / Cerebras) running on free tiers via a Vercel serverless function, with a voice of its own.",
       tech: ["Vercel", "Serverless", "LLM routing"],
-      icon: Mic,
+      icon: Users,
       gradient: "from-blue-500 to-cyan-500"
     },
     {
       title: "Cue — Gesture + Voice Control for Spotify",
       description: "Fully local gesture and voice controller for the Spotify desktop app — no cloud, no LLM. Webcam hand-tracking and a wake word, cross-platform. A study in zero-budget multimodal engineering.",
       tech: ["MediaPipe", "faster-whisper", "openWakeWord"],
-      icon: Music,
+      icon: Users,
       gradient: "from-cyan-500 to-teal-500"
     },
     {
@@ -104,7 +103,7 @@ export default function Projects() {
             >
               <div className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800/50 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 h-full">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                
+
                 <div className="relative">
                   {/* Icon */}
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center mb-6`}>
