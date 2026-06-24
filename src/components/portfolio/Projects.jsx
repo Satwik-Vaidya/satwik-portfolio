@@ -16,6 +16,42 @@ export default function Projects() {
       icon: Brain,
       gradient: "from-blue-500 to-cyan-500"
     },
+
+    {
+      title: "HyAPA-Net — UAV Swarm Management",
+      description: "Hybrid ACO + DRL framework for UAV-swarm routing and fault recovery. On a 20-UAV simulation: 11.4% routing-cost reduction and 100% fault recovery. Under review at SN Computer Science (Springer Nature).",
+      tech: ["Stable-Baselines3", "PPO", "ACO", "Python"],
+      icon: Plane,
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Grokking Expanded",
+      description: "Exploratory ML research on the Ergen et al. convexification conjecture — probing when and why neural networks suddenly generalize.",
+      tech: ["PyTorch", "Optimization", "Research"],
+      icon: Puzzle,
+      gradient: "from-cyan-500 to-teal-500"
+    },
+    {
+      title: "AdaptML",
+      description: "A proprietary meta-learning system that fits the right model to the shape of the problem. Proof-of-concept, currently in early testing.",
+      tech: ["Meta-learning", "Proprietary"],
+      icon: Cpu,
+      gradient: "from-teal-500 to-green-500"
+    },
+    {
+      title: "S — AI Receptionist",
+      description: "An AI receptionist for this site. A multi-engine router (Gemini / Groq / Cerebras) running on free tiers via a Vercel serverless function, with a voice of its own.",
+      tech: ["Vercel", "Serverless", "LLM routing"],
+      icon: Mic,
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Cue — Gesture + Voice Control for Spotify",
+      description: "Fully local gesture and voice controller for the Spotify desktop app — no cloud, no LLM. Webcam hand-tracking and a wake word, cross-platform. A study in zero-budget multimodal engineering.",
+      tech: ["MediaPipe", "faster-whisper", "openWakeWord"],
+      icon: Music,
+      gradient: "from-cyan-500 to-teal-500"
+    },
     {
       title: "ML-Based Water Leakage Detection",
       description: "Recurrent Neural Network model to detect water leakage anomalies and minimize waste through predictive analysis",

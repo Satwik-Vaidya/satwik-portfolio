@@ -4,6 +4,7 @@ import Hero from "./components/portfolio/Hero";
 import About from "./components/portfolio/About";
 import Experience from "./components/portfolio/Experience";
 import Projects from "./components/portfolio/Projects";
+import Awards from "./components/portfolio/Awards";
 import Education from "./components/portfolio/Education";
 import Activities from "./components/portfolio/Activities";
 import Contact from "./components/portfolio/Contact";
