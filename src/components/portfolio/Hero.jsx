@@ -32,8 +32,6 @@ export default function Hero({ opacity }) {
         })()}
       </div>
 
-      
-
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,23 +97,39 @@ export default function Hero({ opacity }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="flex flex-wrap items-center justify-center gap-4 mt-12"
+          className="flex flex-col items-center justify-center gap-6 mt-12"
         >
+          {/* Primary Actions Row */}
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <motion.a
+              href="#contact"
+              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium rounded-full hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get in Touch
+            </motion.a>
+            <motion.a
+              href="#projects"
+              className="px-8 py-4 border border-gray-700 text-gray-300 font-medium rounded-full hover:bg-gray-800/50 transition-all backdrop-blur-sm"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Work
+            </motion.a>
+          </div>
+
+          {/* New Dimension CTA */}
           <motion.a
-            href="#contact"
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium rounded-full hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+            href="/capture.html"
+            className="group relative inline-flex items-center gap-2 px-8 py-4 border border-cyan-500/40 text-cyan-300 italic font-light rounded-full hover:bg-cyan-500/10 hover:border-cyan-400/70 hover:text-cyan-200 transition-all backdrop-blur-sm"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Get in Touch
-          </motion.a>
-          <motion.a
-            href="#projects"
-            className="px-8 py-4 border border-gray-700 text-gray-300 font-medium rounded-full hover:bg-gray-800/50 transition-all backdrop-blur-sm"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View Work
+            Enter a new dimension
+            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 not-italic">
+              →
+            </span>
           </motion.a>
         </motion.div>
       </div>
@@ -131,4 +145,4 @@ export default function Hero({ opacity }) {
       </motion.button>
     </section>
   );
-}
+}   
